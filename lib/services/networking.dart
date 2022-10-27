@@ -13,7 +13,7 @@ class NetworkHelper {
 
     if (response.statusCode == 200) { // se a requisição foi feita com sucesso
       var data = response.body;
-
+print(data);
       return jsonDecode(data);
     } else {
       // imprime mensagem na saída de erro

@@ -28,10 +28,12 @@ class Location {
   }
 
   Future<void> getCurrentLocation() async {
-    var location = Location();
+    // Verificando permissão de acesso
+    await checkLocationPermission();
+
     Position position = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.low);
 
-    latitude = location.latitude!;
-    longitude = location.longitude!;
+    latitude = position.latitude!;
+    longitude = position.longitude!;
   }
 }

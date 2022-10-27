@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import '../services/location.dart';
 import 'dart:convert';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 import '../services/networking.dart';
 import 'location_screen.dart';
@@ -16,9 +17,10 @@ class LoadingScreen extends StatefulWidget {
 class _LoadingScreenState extends State<LoadingScreen> {
   late double latitude;
   late double longitude;
-  void pushToLocationScreen() {
+
+  void pushToLocationScreen(dynamic weatherData) {
     Navigator.push(context, MaterialPageRoute(builder: (context) {
-      return const LocationScreen();
+      return LocationScreen(locationWeather: weatherData);
     }));
   }
 
@@ -44,13 +46,16 @@ class _LoadingScreenState extends State<LoadingScreen> {
   @override
   void initState() {
     super.initState();
-    var location = new Location();
-    location.getCurrentLocation();
-    getData();
+    getLocation();
   }
+
   @override
   Widget build(BuildContext context) {
-    getData();
-    return Scaffold();
+    return const Center(
+      child: SpinKitDoubleBounce(
+        color: Colors.white,
+        size: 100.0,
+      ),
+    );
   }
 }
